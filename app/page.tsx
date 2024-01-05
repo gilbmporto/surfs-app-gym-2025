@@ -20,17 +20,18 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center max-w-6xl mx-auto">
-      {users.length > 0 &&
-        users.map((user: UserEventWithTrainingsProps, index: number) => (
-          <UserData
-            key={index}
-            userId={user.userId}
-            userName={user.userName}
-            trainings={user.trainings}
-            timestamp={user.timestamp}
-            lastTrainingTimestamp={user.lastTrainingTimestamp}
-          />
-        ))}
+      {users.length > 0
+        ? users.map((user: UserEventWithTrainingsProps, index: number) => (
+            <UserData
+              key={index}
+              userId={user.userId}
+              userName={user.userName}
+              trainings={user.trainings}
+              timestamp={user.timestamp}
+              lastTrainingTimestamp={user.lastTrainingTimestamp}
+            />
+          ))
+        : null}
     </main>
   )
 }
