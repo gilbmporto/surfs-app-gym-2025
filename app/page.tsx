@@ -4,6 +4,8 @@ import { UserEventWithTrainingsProps } from "./api/users/route"
 import axios from "axios"
 import { useEffect, useState } from "react"
 
+export const fetchCache = "force-no-store"
+
 export default function Home() {
   const [usersData, setUsersData] = useState<UserEventWithTrainingsProps[]>([])
 

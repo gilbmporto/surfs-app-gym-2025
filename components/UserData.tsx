@@ -5,6 +5,8 @@ import { UserEventWithTrainingsProps } from "@/app/api/users/route"
 import { convertTimestampToDate } from "@/utils"
 import axios from "axios"
 
+export const fetchCache = "force-no-store"
+
 export default function UserData({
   userId = "1",
   userName = "User",
