@@ -1,33 +1,34 @@
 "use client"
+export const dynamic = "force-dynamic"
 import UserData from "@/components/UserData"
 import { UserEventWithTrainingsProps } from "./api/users/route"
 import { useEffect, useState } from "react"
+import axios from "axios"
 
 export default function Home() {
   const [usersData, setUsersData] = useState<UserEventWithTrainingsProps[]>([])
 
   useEffect(() => {
-    fetchAllUsers()
+    getAllUsers()
   }, [])
 
-  async function fetchAllUsers() {
+  async function getAllUsers() {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}api/users`,
+      const baseURL = window.location.origin
+      const response = await axios.get(
+        `${baseURL}/api/users?timestamp=${new Date().getTime()}`,
         {
-          cache: "no-store",
           headers: {
             "Content-Type": "application/json",
             "Cache-Control": "no-cache",
-          },
-          next: {
-            revalidate: 0,
+            Pragma: "no-cache",
+            Expires: "0",
           },
         }
       )
-      const data = await res.json()
-
-      setUsersData(data.data)
+      console.log(window.location.origin)
+      const data = response.data.data
+      setUsersData(data)
     } catch (error) {
       console.log(error)
     }

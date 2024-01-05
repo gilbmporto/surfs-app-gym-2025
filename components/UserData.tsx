@@ -1,7 +1,9 @@
 "use client"
+export const dynamic = "force-dynamic"
 import { useState } from "react"
 import { UserEventWithTrainingsProps } from "@/app/api/users/route"
 import { convertTimestampToDate } from "@/utils"
+import axios from "axios"
 
 export default function UserData({
   userId = "1",
@@ -20,30 +22,25 @@ export default function UserData({
       const confirmAdd = window.confirm("Quer adicionar um novo treino?")
       if (confirmAdd) {
         setLoading(true)
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}api/users/${userId}`,
+        const baseURL = window.location.origin
+        const response = await axios.put(
+          `${baseURL}/api/users/${userId}?timestamp=${new Date().getTime()}`,
           {
-            method: "PUT",
-            cache: "no-store",
-            headers: {
+            Headers: {
               "Content-Type": "application/json",
               "Cache-Control": "no-cache",
-            },
-            next: {
-              revalidate: 0,
+              Pragma: "no-cache",
+              Expires: "0",
             },
           }
         )
-        const data = await res.json()
 
-        if (
-          (data.message = "Number of trainings was successfully incremented")
-        ) {
+        if (response.status === 200) {
+          const data = response.data.data
           setTrainingsQty(trainingsQty + 1)
           setLastTimeStamp((Date.now() / 1000).toString())
+          return data
         }
-
-        console.log(data)
       }
     } catch (error) {
       console.log(error)
