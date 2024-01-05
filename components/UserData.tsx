@@ -23,13 +23,14 @@ export default function UserData({
       if (confirmAdd) {
         setLoading(true)
         const response = await axios.put(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL!}api/users/${userId}`,
+          `${window.location.origin}/api/users/${userId}`,
           {
             headers: {
               "Cache-Control": "no-cache",
             },
           }
         )
+        console.log(response)
         const data = await response.data.data
 
         if (response.statusText === "OK") {

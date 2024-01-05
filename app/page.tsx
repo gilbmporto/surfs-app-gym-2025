@@ -13,14 +13,12 @@ export default function Home() {
 
   async function getAllUsers() {
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL!}api/users/`,
-        {
-          headers: {
-            "Cache-Control": "no-cache",
-          },
-        }
-      )
+      const response = await axios.get(`${window.location.origin}/api/users/`, {
+        headers: {
+          "Cache-Control": "no-cache",
+        },
+      })
+      console.log(window.location.origin)
       const data = response.data.data
       setUsersData(data)
     } catch (error) {
@@ -42,7 +40,9 @@ export default function Home() {
           />
         ))
       ) : (
-        <h2 className="text-3xl text-white">Carregando usuários...</h2>
+        <h2 className="text-3xl text-white text-center">
+          Carregando usuários...
+        </h2>
       )}
     </main>
   )
