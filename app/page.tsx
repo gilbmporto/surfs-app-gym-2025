@@ -13,6 +13,7 @@ export default function Home() {
   async function fetchAllUsers() {
     try {
       const res = await fetch(`${window.location.origin}/api/users`, {
+        cache: "no-store",
         next: {
           revalidate: 0,
         },
