@@ -13,7 +13,7 @@ export default function Home() {
   async function fetchAllUsers() {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/api/users`,
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}api/users`,
         {
           cache: "no-store",
           headers: {
