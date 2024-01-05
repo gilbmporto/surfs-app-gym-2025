@@ -14,7 +14,12 @@ export default function Home() {
   async function getAllUsers() {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL!}api/users/`
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL!}api/users/`,
+        {
+          headers: {
+            "Cache-Control": "no-cache",
+          },
+        }
       )
       const data = response.data.data
       setUsersData(data)
