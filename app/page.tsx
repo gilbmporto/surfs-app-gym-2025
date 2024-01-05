@@ -12,12 +12,19 @@ export default function Home() {
 
   async function fetchAllUsers() {
     try {
-      const res = await fetch(`${window.location.origin}/api/users`, {
-        cache: "no-store",
-        next: {
-          revalidate: 0,
-        },
-      })
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}api/users`,
+        {
+          cache: "no-store",
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache",
+          },
+          next: {
+            revalidate: 0,
+          },
+        }
+      )
       const data = await res.json()
 
       setUsersData(data.data)

@@ -21,13 +21,14 @@ export default function UserData({
       if (confirmAdd) {
         setLoading(true)
         const res = await fetch(
-          `${window.location.origin}/api/users/${userId}`,
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL}/api/users/${userId}`,
           {
             method: "PUT",
+            cache: "no-store",
             headers: {
               "Content-Type": "application/json",
+              "Cache-Control": "no-cache",
             },
-            cache: "no-store",
             next: {
               revalidate: 0,
             },
