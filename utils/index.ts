@@ -97,3 +97,18 @@ export const getUserEvents = async (event: string, name: string) => {
     .sort((a, b) => a.blockNumber - b.blockNumber)
   return events
 }
+
+// async function getAllUsers() {
+//   try {
+//     const response = await axios.get(`${window.location.origin}/api/users/`, {
+//       next: {
+//         revalidate: 0,
+//       }
+//     })
+//     console.log(window.location.origin)
+//     const data = response.data.data
+//     setUsersData(data)
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }

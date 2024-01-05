@@ -1,28 +1,25 @@
 "use client"
 import UserData from "@/components/UserData"
 import { UserEventWithTrainingsProps } from "./api/users/route"
-import axios from "axios"
 import { useEffect, useState } from "react"
-
-export const fetchCache = "force-no-store"
 
 export default function Home() {
   const [usersData, setUsersData] = useState<UserEventWithTrainingsProps[]>([])
 
   useEffect(() => {
-    getAllUsers()
+    fetchAllUsers()
   }, [])
 
-  async function getAllUsers() {
+  async function fetchAllUsers() {
     try {
-      const response = await axios.get(`${window.location.origin}/api/users/`, {
-        headers: {
-          "Cache-Control": "no-cache",
+      const res = await fetch(`${window.location.origin}/api/users`, {
+        next: {
+          revalidate: 0,
         },
       })
-      console.log(window.location.origin)
-      const data = response.data.data
-      setUsersData(data)
+      const data = await res.json()
+
+      setUsersData(data.data)
     } catch (error) {
       console.log(error)
     }

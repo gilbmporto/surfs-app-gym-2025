@@ -1,8 +1,6 @@
 import { getEvents, getUserEvents } from "@/utils"
 import { NextRequest, NextResponse } from "next/server"
 
-export const fetchCache = "force-no-store"
-
 export type CreatedUserEventProps = {
   userId: string
   userName: string

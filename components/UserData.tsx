@@ -1,11 +1,7 @@
 "use client"
-import React, { useState } from "react"
-
+import { useState } from "react"
 import { UserEventWithTrainingsProps } from "@/app/api/users/route"
 import { convertTimestampToDate } from "@/utils"
-import axios from "axios"
-
-export const fetchCache = "force-no-store"
 
 export default function UserData({
   userId = "1",
@@ -24,22 +20,28 @@ export default function UserData({
       const confirmAdd = window.confirm("Quer adicionar um novo treino?")
       if (confirmAdd) {
         setLoading(true)
-        const response = await axios.put(
+        const res = await fetch(
           `${window.location.origin}/api/users/${userId}`,
           {
+            method: "PUT",
             headers: {
-              "Cache-Control": "no-cache",
+              "Content-Type": "application/json",
+            },
+            next: {
+              revalidate: 0,
             },
           }
         )
-        console.log(response)
-        const data = await response.data.data
+        const data = await res.json()
 
-        if (response.statusText === "OK") {
-          setTrainingsQty(Number(trainings) + 1)
+        if (
+          (data.message = "Number of trainings was successfully incremented")
+        ) {
+          setTrainingsQty(trainingsQty + 1)
           setLastTimeStamp((Date.now() / 1000).toString())
         }
-        return data
+
+        console.log(data)
       }
     } catch (error) {
       console.log(error)
