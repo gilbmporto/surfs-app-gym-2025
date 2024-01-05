@@ -1,5 +1,4 @@
 import UserData from "@/components/UserData"
-import axios from "axios"
 import { UserEventWithTrainingsProps } from "./api/users/route"
 
 export default async function Home() {
@@ -8,11 +7,17 @@ export default async function Home() {
 
   async function getAllUsers() {
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL!}api/users/`
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_REACT_APP_API_URL!}api/users/`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       )
-      const users: UserEventWithTrainingsProps[] = await response.data.data
-      return users
+      const data = await response.json()
+      return data.data
     } catch (error) {
       console.log(error)
     }
