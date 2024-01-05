@@ -3,6 +3,7 @@ import React, { useState } from "react"
 
 import { UserEventWithTrainingsProps } from "@/app/api/users/route"
 import { convertTimestampToDate } from "@/utils"
+import axios from "axios"
 
 export default function UserData({
   userId = "1",
@@ -21,20 +22,12 @@ export default function UserData({
       const confirmAdd = window.confirm("Quer adicionar um novo treino?")
       if (confirmAdd) {
         setLoading(true)
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL!}api/users/${userId}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+        const response = await axios.put(
+          `${process.env.NEXT_PUBLIC_REACT_APP_API_URL!}api/users/${userId}`
         )
-        const data = await response.json()
+        const data = await response.data.data
 
-        if (
-          data.message === "Number of trainings was successfully incremented"
-        ) {
+        if (response.statusText === "OK") {
           setTrainingsQty(Number(trainings) + 1)
           setLastTimeStamp((Date.now() / 1000).toString())
         }
