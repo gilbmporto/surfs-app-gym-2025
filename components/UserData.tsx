@@ -51,7 +51,7 @@ export default function UserData({
   }
 
   return (
-    <div className="max-w-xl sm:w-full w-60 my-4 border bg-slate-300 rounded-xl flex flex-col sm:flex-row items-center justify-between p-4 text-black gap-5">
+    <div className="max-w-xl sm:w-full w-60 my-4 border bg-slate-300 rounded-xl flex flex-col sm:flex-row items-center justify-between p-4 text-black gitgap-5">
       <div className="flex sm:flex-row items-center w-52 sm:w-36 sm:justify-center justify-between pl-2 sm:gap-2">
         <h2 className="w-20 text-lg sm:text-lg">{userName}</h2>
         <button
