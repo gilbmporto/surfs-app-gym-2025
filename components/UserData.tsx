@@ -24,7 +24,7 @@ export default function UserData({
         setLoading(true)
         const baseURL = window.location.origin
         const response = await axios.put(
-          `${baseURL}/api/users/${userId}?timestamp=${new Date().getTime()}`,
+          `api/users/${userId}?timestamp=${new Date().getTime()}`,
           {
             Headers: {
               "Content-Type": "application/json",

@@ -14,9 +14,8 @@ export default function Home() {
 
   async function getAllUsers() {
     try {
-      const baseURL = window.location.origin
       const response = await axios.get(
-        `${baseURL}/api/users?timestamp=${new Date().getTime()}`,
+        `api/users?timestamp=${new Date().getTime()}`,
         {
           headers: {
             "Content-Type": "application/json",
