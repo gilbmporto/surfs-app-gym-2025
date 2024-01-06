@@ -51,9 +51,9 @@ export default function UserData({
   }
 
   return (
-    <div className="max-w-xl w-full my-4 border bg-slate-300 rounded-xl flex flex-col sm:flex-row items-center justify-between text-black p-4 sm:gap-5 gap-4">
-      <div className="flex sm:flex-row items-center w-40 sm:w-36 sm:justify-center justify-between pl-2 sm:gap-2">
-        <h2 className="w-20">{userName}</h2>
+    <div className="max-w-xl sm:w-full w-60 my-4 border bg-slate-300 rounded-xl flex flex-col sm:flex-row items-center justify-between p-4 text-black gap-5">
+      <div className="flex sm:flex-row items-center w-52 sm:w-36 sm:justify-center justify-between pl-2 sm:gap-2">
+        <h2 className="w-20 text-lg sm:text-lg">{userName}</h2>
         <button
           className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-2xl 
             ${
@@ -68,7 +68,7 @@ export default function UserData({
         </button>
       </div>
       <div
-        className={`text-center flex sm:flex-col w-40 sm:w-20 ${
+        className={`text-center flex sm:flex-col w-52 sm:w-20 ${
           loading ? `flex-col items-center` : `justify-between`
         }`}
       >
@@ -76,16 +76,14 @@ export default function UserData({
           Treinos
         </p>
         {loading ? (
-          <p className="text-lg text-green-700">Aguarde...</p>
+          <p className="text-lg text-green-700 pr-4 sm:pr-0">Aguarde...</p>
         ) : (
-          <p className="text-lg">{trainingsQty}</p>
+          <p className="text-lg pr-4 sm:pr-0">{trainingsQty}</p>
         )}
       </div>
 
-      <div className="flex flex-col items-end">
-        <p className="text-center text-sm sm:text-base">
-          Última vez que treinou:
-        </p>
+      <div className="flex flex-col items-center sm:items-end text-lg">
+        <p className="text-center">Última vez que treinou:</p>
 
         {loading ? (
           <p className="text-lg text-green-700">Aguarde...</p>
