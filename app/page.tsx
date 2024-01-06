@@ -4,7 +4,6 @@ import UserData from "@/components/UserData"
 import { UserEventWithTrainingsProps } from "./api/users/route"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { revalidatePath } from "next/cache"
 
 export default function Home() {
   const [usersData, setUsersData] = useState<UserEventWithTrainingsProps[]>([])
@@ -26,10 +25,9 @@ export default function Home() {
           },
         }
       )
-      console.log(window.location.origin)
+      console.log(response.data)
       const data = response.data.data
       setUsersData(data)
-      revalidatePath("/")
     } catch (error) {
       console.log(error)
     }

@@ -1,5 +1,6 @@
 import { getEvents, getUserEvents } from "@/utils"
 import { NextRequest, NextResponse } from "next/server"
+export const dynamic = "force-dynamic"
 
 export type CreatedUserEventProps = {
   userId: string
