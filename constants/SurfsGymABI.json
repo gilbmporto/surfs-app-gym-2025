@@ -1,6 +1,13 @@
 [
   {
     "inputs": [
+      { "internalType": "address", "name": "_admin", "type": "address" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
       { "internalType": "address", "name": "owner", "type": "address" }
     ],
     "name": "OwnableInvalidOwner",
@@ -12,6 +19,31 @@
     ],
     "name": "OwnableUnauthorizedAccount",
     "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "userName",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "AuthorizedToSet",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -89,8 +121,62 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "userName",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "trainings",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "TrainingSet",
+    "type": "event"
+  },
+  {
     "inputs": [{ "internalType": "string", "name": "_name", "type": "string" }],
     "name": "addNewUser",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "admin",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "_id", "type": "uint256" }],
+    "name": "authorizeSetUserTrainings",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_newAdmin", "type": "address" }
+    ],
+    "name": "changeAdmin",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -135,6 +221,16 @@
     "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_id", "type": "uint256" },
+      { "internalType": "uint256", "name": "_value", "type": "uint256" }
+    ],
+    "name": "setUserTrainings",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

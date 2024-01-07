@@ -49,7 +49,43 @@ export async function GET(req: NextRequest) {
       }
     })
 
-    let usersWithTrainings = await Promise.all(usersWithTrainingsPromises)
+    let usersWithTrainings: UserEventWithTrainingsProps[] = await Promise.all(
+      usersWithTrainingsPromises
+    )
+
+    const usersWithSetTrainingsPromises = usersWithTrainings.map(
+      async (user) => {
+        const userSetEvents = await getUserEvents("TrainingSet", user.userName)
+        if (userSetEvents.length !== 0) {
+          if (
+            userSetEvents[userSetEvents.length - 1]?.args?.timestamp >
+            user.lastTrainingTimestamp
+          ) {
+            return {
+              ...user,
+              trainings:
+                userSetEvents[
+                  userSetEvents.length - 1
+                ]?.args?.trainings.toString(),
+              lastTrainingTimestamp:
+                userSetEvents[
+                  userSetEvents.length - 1
+                ]?.args?.timestamp.toString(),
+            }
+          } else {
+            return {
+              ...user,
+            }
+          }
+        } else {
+          return {
+            ...user,
+          }
+        }
+      }
+    )
+
+    usersWithTrainings = await Promise.all(usersWithSetTrainingsPromises)
 
     // Sort the users based on the quantity of trainings
     usersWithTrainings = usersWithTrainings.sort((a, b) => {

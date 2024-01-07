@@ -6,6 +6,6 @@
 - It's still in development, but its main features are finished.
 - Enjoy!
 
-Access it here: [Surf's Gym App Website](#)
+Access it here: [Surf's Gym App Website](https://surfs-gym-dapp.vercel.app/)
 
 ---
