@@ -1,5 +1,5 @@
 import { ethers } from "ethers"
-import ABI from "../constants/SurfsGymABI.json"
+import ABI from "../constants/SurfsGymABI3.json"
 
 export function toJson(data: any) {
   if (data !== undefined) {
@@ -79,7 +79,7 @@ export const getEvents = async (event: string) => {
   return events
 }
 
-export const getUserEvents = async (event: string, name: string) => {
+export const getUserEvents = async (event: string, id: string) => {
   const provider = new ethers.JsonRpcProvider(process.env.MUMBAI_RPC_URL!)
   const contract = new ethers.Contract(
     process.env.CONTRACT_ADDRESS!,
@@ -93,7 +93,7 @@ export const getUserEvents = async (event: string, name: string) => {
   )
   const events = rawEvents
     .filter(isEventLog)
-    .filter((e) => e.args.userName === name)
+    .filter((e) => e.args.id.toString() === id)
     .sort((a, b) => a.blockNumber - b.blockNumber)
   return events
 }

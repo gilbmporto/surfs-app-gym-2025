@@ -18,20 +18,40 @@ export type UserEventWithTrainingsProps = {
 export async function GET(req: NextRequest) {
   try {
     const events = await getEvents("NewUserCreated")
-    const users = events.map((e) => {
-      return {
-        userId: e.args.id.toString(),
-        userName: e.args.userName,
-        timestamp: e.args.timestamp.toString(),
-      } as CreatedUserEventProps
+    const deletedUsersEvent = await getEvents("UserDeleted")
+    const userNameChangedEvent = await getEvents("UserNameChanged")
+
+    const sortedUserNameChangedEvents = userNameChangedEvent.sort((a, b) => {
+      return parseInt(a.args.timestamp) - parseInt(b.args.timestamp)
+    })
+
+    let users = events
+      .map((e) => {
+        return {
+          userId: e.args.id.toString(),
+          userName: e.args.userName,
+          timestamp: e.args.timestamp.toString(),
+        } as CreatedUserEventProps
+      })
+      .filter((e) => {
+        return !deletedUsersEvent.find((d) => d.args.id.toString() === e.userId)
+      })
+
+    sortedUserNameChangedEvents.forEach((changeEvent) => {
+      // Find the index of the user in the users array
+      const userIndex = users.findIndex(
+        (user) => user.userId === changeEvent.args.id.toString()
+      )
+
+      if (userIndex !== -1) {
+        // Update the userName of the user in the array
+        users[userIndex].userName = changeEvent.args.newUserName
+      }
     })
 
     // Use Promise.all to wait for all getUserEvents calls to resolve
     const usersWithTrainingsPromises = users.map(async (user) => {
-      const userEvents = await getUserEvents(
-        "TrainingIncremented",
-        user.userName
-      )
+      const userEvents = await getUserEvents("TrainingIncremented", user.userId)
       if (userEvents.length !== 0) {
         return {
           ...user,
@@ -55,7 +75,7 @@ export async function GET(req: NextRequest) {
 
     const usersWithSetTrainingsPromises = usersWithTrainings.map(
       async (user) => {
-        const userSetEvents = await getUserEvents("TrainingSet", user.userName)
+        const userSetEvents = await getUserEvents("TrainingSet", user.userId)
         if (userSetEvents.length !== 0) {
           if (
             userSetEvents[userSetEvents.length - 1]?.args?.timestamp >

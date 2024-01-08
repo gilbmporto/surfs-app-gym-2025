@@ -1,7 +1,12 @@
 {
-  "SurfsGym": {
+  "SurfsGym2": {
     "version": "2.0.0",
     "address": "0x239Eff22010ea7b4FF17A3d604399DB848Df9A6E",
     "transaction-deployment-hash": "0xec9cb8c7ea5fc4f118c979aebf4ec67626f300b5298e090701403d220ada02be"
+  },
+  "SurfsGym3": {
+    "version": "3.0.0",
+    "address": "0xA45BB8b8d3d6813F7f4BAEF05F18e75304d2949D",
+    "transaction-deployment-hash": "0x7ab7eb9b3808d044f9a221024b2c72861cd1b31cc5fc621c880492f477bdf264"
   }
 }

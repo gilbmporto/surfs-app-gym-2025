@@ -35,17 +35,29 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center max-w-6xl mx-auto">
+      <button
+        className="px-4 py-2 text-lg text-white rounded-xl bg-green-600 hover:bg-green-700 cursor-pointer mb-4"
+        onClick={() => location.reload()}
+      >
+        Atualizar
+      </button>
       {usersData.length > 0 ? (
-        usersData.map((user: UserEventWithTrainingsProps, index: number) => (
-          <UserData
-            key={index}
-            userId={user.userId}
-            userName={user.userName}
-            trainings={user.trainings}
-            timestamp={user.timestamp}
-            lastTrainingTimestamp={user.lastTrainingTimestamp}
-          />
-        ))
+        usersData.map((user: UserEventWithTrainingsProps, index: number) => {
+          if (user.userId === "0") {
+            return null
+          }
+
+          return (
+            <UserData
+              key={index}
+              userId={user.userId}
+              userName={user.userName}
+              trainings={user.trainings}
+              timestamp={user.timestamp}
+              lastTrainingTimestamp={user.lastTrainingTimestamp}
+            />
+          )
+        })
       ) : (
         <h2 className="text-3xl text-white text-center">
           Carregando usuários...
