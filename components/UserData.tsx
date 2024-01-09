@@ -53,7 +53,13 @@ export default function UserData({
   return (
     <div className="max-w-xl sm:w-full w-60 my-4 border bg-slate-300 rounded-xl flex flex-col sm:flex-row items-center justify-between p-4 text-black gap-5">
       <div className="flex sm:flex-row items-center w-52 sm:w-36 sm:justify-center justify-between pl-2 sm:gap-2">
-        <h2 className="w-20 text-lg sm:w-20">{userName}</h2>
+        <h2
+          className={`w-20 ${
+            userName.length > 13 ? `sm:w-24` : `sm:w-20`
+          } text-lg `}
+        >
+          {userName}
+        </h2>
         <button
           className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-2xl 
             ${

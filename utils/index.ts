@@ -37,7 +37,7 @@ export function convertTimestampToDate(timestamp: string) {
 
 export async function setContractUp() {
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!)
-  const provider = new ethers.JsonRpcProvider(process.env.MUMBAI_RPC_URL!)
+  const provider = new ethers.JsonRpcProvider(process.env.POLYGON_RPC_URL!)
   const walletWithProvider = wallet.connect(provider)
   const contract = new ethers.Contract(
     process.env.CONTRACT_ADDRESS!,
@@ -49,7 +49,7 @@ export async function setContractUp() {
 }
 
 export const getFirstBlock = async () => {
-  const provider = new ethers.JsonRpcProvider(process.env.MUMBAI_RPC_URL!)
+  const provider = new ethers.JsonRpcProvider(process.env.POLYGON_RPC_URL!)
   const receipt = await provider.getTransactionReceipt(
     process.env.DEPLOYMENT_TRANSACTION_HASH!
   )
@@ -57,13 +57,13 @@ export const getFirstBlock = async () => {
 }
 
 export const getLatestBlock = async () => {
-  const provider = new ethers.JsonRpcProvider(process.env.MUMBAI_RPC_URL!)
+  const provider = new ethers.JsonRpcProvider(process.env.POLYGON_RPC_URL!)
   const block = await provider.getBlock("latest")
   return block?.number
 }
 
 export const getEvents = async (event: string) => {
-  const provider = new ethers.JsonRpcProvider(process.env.MUMBAI_RPC_URL!)
+  const provider = new ethers.JsonRpcProvider(process.env.POLYGON_RPC_URL!)
   const contract = new ethers.Contract(
     process.env.CONTRACT_ADDRESS!,
     ABI,
@@ -80,7 +80,7 @@ export const getEvents = async (event: string) => {
 }
 
 export const getUserEvents = async (event: string, id: string) => {
-  const provider = new ethers.JsonRpcProvider(process.env.MUMBAI_RPC_URL!)
+  const provider = new ethers.JsonRpcProvider(process.env.POLYGON_RPC_URL!)
   const contract = new ethers.Contract(
     process.env.CONTRACT_ADDRESS!,
     ABI,
