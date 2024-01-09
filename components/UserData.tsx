@@ -22,7 +22,6 @@ export default function UserData({
       const confirmAdd = window.confirm("Quer adicionar um novo treino?")
       if (confirmAdd) {
         setLoading(true)
-        const baseURL = window.location.origin
         const response = await axios.put(
           `api/users/${userId}?timestamp=${new Date().getTime()}`,
           {
