@@ -32,6 +32,7 @@ export default function UserData({
               Pragma: "no-cache",
               Expires: "0",
             },
+            setTimeout: 18000,
           }
         )
 
