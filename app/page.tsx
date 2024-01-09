@@ -43,7 +43,9 @@ export default function Home() {
       >
         Atualizar
       </button>
-      {errorMessage ? <p className="text-red-500">{errorMessage}</p> : null}
+      {errorMessage ? (
+        <p className="text-red-400 text-lg text-center">{errorMessage}</p>
+      ) : null}
       {errorMessage ? null : usersData.length > 0 ? (
         usersData.map((user: UserEventWithTrainingsProps, index: number) => {
           if (user.userId === "0") {
