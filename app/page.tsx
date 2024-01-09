@@ -7,6 +7,7 @@ import axios from "axios"
 
 export default function Home() {
   const [usersData, setUsersData] = useState<UserEventWithTrainingsProps[]>([])
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
   useEffect(() => {
     getAllUsers()
@@ -30,6 +31,7 @@ export default function Home() {
       setUsersData(data)
     } catch (error) {
       console.log(error)
+      setErrorMessage("Erro. Atualize a página e tente novamente.")
     }
   }
 
@@ -41,7 +43,8 @@ export default function Home() {
       >
         Atualizar
       </button>
-      {usersData.length > 0 ? (
+      {errorMessage ? <p className="text-red-500">{errorMessage}</p> : null}
+      {errorMessage ? null : usersData.length > 0 ? (
         usersData.map((user: UserEventWithTrainingsProps, index: number) => {
           if (user.userId === "0") {
             return null
