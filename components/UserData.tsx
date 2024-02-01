@@ -1,9 +1,12 @@
 "use client"
-export const dynamic = "force-dynamic"
 import { useState } from "react"
 import { UserEventWithTrainingsProps } from "@/app/api/users/route"
 import { convertTimestampToDate } from "@/utils"
 import axios from "axios"
+import toast from "react-hot-toast"
+
+export const dynamic = "force-dynamic"
+export const maxDuration = 60
 
 export default function UserData({
   userId = "1",
@@ -31,7 +34,7 @@ export default function UserData({
               Pragma: "no-cache",
               Expires: "0",
             },
-            setTimeout: 18000,
+            setTimeout: 20000,
           }
         )
 
@@ -39,10 +42,14 @@ export default function UserData({
           const data = response.data.data
           setTrainingsQty(trainingsQty + 1)
           setLastTimeStamp((Date.now() / 1000).toString())
+          toast.success("Treino adicionado com sucesso!")
           return data
         }
       }
     } catch (error) {
+      toast.error(
+        "Erro ao adicionar treino! Aguarde 30 segundos e atualize a página."
+      )
       console.log(error)
       setLoading(false)
     } finally {

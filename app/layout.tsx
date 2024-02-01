@@ -1,9 +1,7 @@
 import type { Metadata } from "next"
-// import { Inter } from "next/font/google"
 import "./globals.css"
 import Header from "@/components/Header"
-
-// const inter = Inter({ subsets: ["latin"] })
+import Providers from "@/components/Providers"
 
 export const fetchCache = "force-no-store"
 
@@ -21,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col items-center p-20 max-w-6xl mx-auto">
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   )
