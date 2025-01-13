@@ -5,9 +5,9 @@ export default function Header() {
     <>
       <h1 className="text-5xl font-bold mb-10 text-center">Surf's Gym App</h1>
       <img
-        src="https://i.postimg.cc/qBFPQtGJ/Captura-de-tela-de-2024-01-03-16-10-12.png"
+        src="terry-crews.jpg"
         alt="Surf's Gym SuperLogo"
-        className="w-60 rounded-2xl mb-5"
+        className="w-80 rounded-2xl mb-5"
       />
     </>
   )
